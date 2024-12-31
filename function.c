@@ -1,7 +1,7 @@
 #include "function.h"
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
+#include <stdli.h>
 //logic ham
 //*******************************************Zeno************************//
 // Giao dien man hinh chinh
