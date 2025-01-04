@@ -60,21 +60,24 @@ int main(int argc, char *argv[]) {
 								scanf("%d", &choiceAdmin);
 								switch(choiceAdmin){
 									case 1:
+										categoryMenu();
 										viewProduct();
 										exitMenu();
 										break;
 									case 2:
-										viewProduct();
+										categoryMenu();
+										viewFullproduct();						
 										addproduct();
 										exitMenu();
 										break;
 									case 3: // Zeno
-										viewProduct();
+										categoryMenu();
+										viewFullproduct();
 										editproduct();
 										exitMenu();
 										break;
 									case 4: // Zeno
-										viewProduct();
+										viewFullproduct();
 										deleteProduct();
 										exitMenu();
 										break;
@@ -83,7 +86,7 @@ int main(int argc, char *argv[]) {
 										exitMenu();
 										break;
 									case 6:
-										viewProduct();
+										viewFullproduct();
 										searchProducts();
 										exitMenu();
 										break;

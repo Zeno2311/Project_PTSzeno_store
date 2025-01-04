@@ -85,7 +85,7 @@ void categoryMenu1(){ // menu.1 them danh muc
     // Kiem tra thong tin nhap vao
     for(int i = 0; i < n; i++){
         int valid = 0;
-        while (!valid) {
+        while (!valid){
             printf("*Enter category information*\n");
             // id danh muc
             printf("ID: ");
@@ -416,9 +416,8 @@ void clientMenu(int choiceClient){
 	printf("================================================\n");
 	printf("Enter The Choice: ");
 }
-//****************************************Zeno***************************//
-void viewProduct(){ // menu.01 in san pham hien co ra man hinh
-	
+//********************************Zeno***********************************//
+void viewFullproduct(){
 	FILE *ptr = fopen("product.dat","rb");
 	if(ptr == NULL){
 	printf("Error opening file.\n");
@@ -440,6 +439,50 @@ void viewProduct(){ // menu.01 in san pham hien co ra man hinh
 	printf("*=======|===========================|===============|=============*\n");
 	// Dong  file
 	fclose(ptr);
+}
+//****************************************Zeno***************************//
+void viewProduct() { // In san pham theo yeu cau cua nguoi dung
+    char category[50];
+    printf("Enter the category to view products: ");
+    fflush(stdin);
+    if (fgets(category, sizeof(category), stdin)) {
+        category[strcspn(category, "\n")] = '\0'; // Remove newline character
+    }
+
+    FILE *ptr = fopen("product.dat", "rb");
+    if (ptr == NULL) {
+        printf("Error opening file.\n");
+        return;
+    }
+
+    Product view;
+    int found = 0;
+
+    printf("\t*** ZenoQ Convenience Store Management System ***\n");
+    printf("*=======|===========================|===============|=============*\n");
+    printf("|  ID   |       Product Name        |      Price    |   Quantity  |\n");
+    printf("|=======|===========================|===============|=============|\n");
+
+    while (fread(&view, sizeof(Product), 1, ptr) != NULL) {
+        if (strcmp(view.typeProduct, category) == 0) {
+            printf("| %5d | %-25s | %-13s | %11d |\n",
+                view.id,
+                view.nameProduct,
+                view.price,
+                view.quantity);
+            printf("|-------|---------------------------|---------------|-------------|\n");
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("| No products found in category: %-25s |\n", category);
+        printf("|-------|---------------------------|---------------|-------------|\n");
+    }
+
+    printf("*=======|===========================|===============|=============*\n");
+
+    fclose(ptr);
 }
 //********************************************************Zeno***********//
 void addproduct(){ // menu.02 them san pham vao trong cua hang

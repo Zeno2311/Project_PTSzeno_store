@@ -17,6 +17,7 @@ void categoryMenu4(); // tim kiem danh muc
 void categoryMenu5(); // sap xep danh muc theo ten 
 // Nguyen ham giao dien quan ly san pham cua admin
 void adminMenu(int choiceAdmin);
+void viewFullproduct(); // in ra tat ca san pham co trong file
 void viewProduct(); // menu.01 hien thi cac san pham san co trong cua hang
 void addproduct(); // menu.02 them san pham vao trong cua hang
 void editproduct(); // menu.03 sua san pham trong cua hang
