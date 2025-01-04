@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=00000000a0000000000000000
-UnitCount=4
+UnitCount=6
 
 [VersionInfo]
 Major=1
@@ -90,14 +90,20 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit6]
-FileName=Product.bin
-
 [Unit5]
-FileName=Product.bin
+FileName=product.dat
 Folder=Data
-Compile=1
-Link=1
+Compile=0
+Link=0
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit6]
+FileName=category.dat
+Folder=Data
+Compile=0
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
