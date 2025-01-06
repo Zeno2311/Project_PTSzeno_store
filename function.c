@@ -91,7 +91,7 @@ void categoryMenu1(){ // menu.1 them danh muc
             printf("ID: ");
             scanf("%d", &view2[i].id);
             getchar();
-            //Kiem tra xem co bij trung lap id hay khong
+            //Kiem tra xem co bi trung lap id hay khong
             FILE *checkFile = fopen("category.dat", "rb");
             if (checkFile != NULL){
                 Category existingCategory;
@@ -123,7 +123,7 @@ void categoryMenu1(){ // menu.1 them danh muc
                 Category existingCategory;
                 int nameExists = 0;
                 while (fread(&existingCategory, sizeof(Category), 1, checkFile)) {
-                    if (strcmp(existingCategory.categoryProduct, view2[i].categoryProduct) == 0) {
+                    if (strcasecmp(existingCategory.categoryProduct, view2[i].categoryProduct) == 0) {
                         nameExists = 1;
                         break;
                     }
@@ -191,7 +191,7 @@ void categoryMenu2(){ // menu.2 sua danh muc
         isValidName = 1;
         Category temp;
         while (fread(&temp, sizeof(Category), 1, ptr)) {
-            if (strcmp(temp.categoryProduct, edit.categoryProduct) == 0 && temp.id != edit.id) {
+            if (strcasecmp(temp.categoryProduct, edit.categoryProduct) == 0 && temp.id != edit.id) {
                 printf("Category name already exists. Please choose a different name.\n");
                 isValidName = 0;
                 break;
@@ -464,7 +464,7 @@ void viewProduct() { // In san pham theo yeu cau cua nguoi dung
     printf("|=======|===========================|===============|=============|\n");
 
     while (fread(&view, sizeof(Product), 1, ptr) != NULL) {
-        if (strcmp(view.typeProduct, category) == 0) {
+        if (strcasecmp(view.typeProduct, category) == 0) {
             printf("| %5d | %-25s | %-13s | %11d |\n",
                 view.id,
                 view.nameProduct,
@@ -522,7 +522,7 @@ void addproduct(){ // menu.02 them san pham vao trong cua hang
         int isValidName = 1;
         Product temp;
         while (fread(&temp, sizeof(Product), 1, ptr)) {
-            if (strcmp(temp.nameProduct, add[i].nameProduct) == 0) {
+            if (strcasecmp(temp.nameProduct, add[i].nameProduct) == 0) {
                 printf("Product name already exists. Please choose a different name.\n");
                 isValidName = 0;
                 break;
