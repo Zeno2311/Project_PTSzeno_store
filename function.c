@@ -485,9 +485,9 @@ void viewProduct() { // In san pham theo yeu cau cua nguoi dung
     fclose(ptr);
 }
 //********************************************************Zeno***********//
-void addproduct(){ // menu.02 them san pham vao trong cua hang
+void addproduct() { // menu.02 them san pham vao trong cua hang
     FILE *ptr = fopen("product.dat", "ab+");
-    if(ptr == NULL){
+    if (ptr == NULL) {
         printf("Error opening file.\n");
         return;
     }
@@ -496,16 +496,30 @@ void addproduct(){ // menu.02 them san pham vao trong cua hang
     printf("Enter the quantity of products you want to add:\n");
     scanf("%d", &n);
     getchar();
+    Product temp; // Khai bao temp o day de dung chung
     for (int i = 0; i < n; i++) {
         printf("*Enter product information*\n");
-        // ID san pham
-        printf("ID: ");
-        scanf("%d", &add[i].id);
-        getchar();
-        while (add[i].id < 1) { // Kiem tra ID hop le
-            printf("Invalid ID. Please enter a valid ID: ");
+        // Kiem tra ID khong bi trung lap
+        int isValidID = 0;
+        while (!isValidID) {
+            printf("ID: ");
             scanf("%d", &add[i].id);
             getchar();
+            while (add[i].id < 1) { // Kiem tra ID hop le
+                printf("Invalid ID. Please enter a valid ID: ");
+                scanf("%d", &add[i].id);
+                getchar();
+            }
+            // Kiem tra ID trung lap
+            isValidID = 1; // Mac dinh la hop le
+            fseek(ptr, 0, SEEK_SET);
+            while (fread(&temp, sizeof(Product), 1, ptr)) {
+                if (temp.id == add[i].id) {
+                    printf("ID already exists. Please enter a different ID.\n");
+                    isValidID = 0;
+                    break;
+                }
+            }
         }
         // Ten san pham
         printf("Name Product: ");
@@ -520,7 +534,6 @@ void addproduct(){ // menu.02 them san pham vao trong cua hang
         // Kiem tra ten san pham khong bi trung
         fseek(ptr, 0, SEEK_SET);
         int isValidName = 1;
-        Product temp;
         while (fread(&temp, sizeof(Product), 1, ptr)) {
             if (strcasecmp(temp.nameProduct, add[i].nameProduct) == 0) {
                 printf("Product name already exists. Please choose a different name.\n");
@@ -569,6 +582,7 @@ void addproduct(){ // menu.02 them san pham vao trong cua hang
     fclose(ptr);
     printf("\nUpdated Successfully !!!\n");
 }
+
 //*******************************************Zeno************************//
 void editproduct(){ // menu.03 sua san pham theo id san pham
     int addEdit;
@@ -819,12 +833,11 @@ void searchProducts(){ // menu.06 tim kiem san pham theo ten
     fclose(ptr);
     // Nhap ten san pham
     printf("What product do you want to find? Please enter product name: ");
-    getchar(); // Ð?c ký t? newline t? tru?c
+    getchar(); 
     fgets(searchName, sizeof(searchName), stdin);
-    // Loai bo ki tu newline khi nhap ten san pham
-    searchName[strcspn(searchName, "\n")] = 0;
+        searchName[strcspn(searchName, "\n")] = 0;
 
-    // N?u ngu?i dùng nh?p ít nh?t 3 ký t?, tìm ki?m theo 3 ký t? d?u tiên
+    // nguoi dung phai nhap it nhat 3 ki tu 
     if (strlen(searchName) >= 3) {
         for(int i = 0; i < totalProducts; i++){
             if(strncasecmp(products[i].nameProduct, searchName, 3) == 0){ // So sanh 3 ky tu dau
@@ -845,7 +858,7 @@ void searchProducts(){ // menu.06 tim kiem san pham theo ten
             printf("No product found with the first three characters you entered.\n");
         }
     } else {
-        // N?u ngu?i dùng nh?p tên d?y d?, tìm ki?m chính xác theo tên
+        // Neu nguoi dung nhap day du ten muon tim
         for(int i = 0; i < totalProducts; i++){
             if(strcmp(products[i].nameProduct, searchName) == 0){ // So sanh ten san pham
                 fake++;
