@@ -135,15 +135,17 @@ int main(int argc, char *argv[]) {
 								scanf("%d", &choiceClient);
 								switch(choiceClient){
 									case 1:
+										categoryMenu();
 										viewProduct();
 										exitMenu();
 										break;
 									case 2:
+										
 										sortProducts();
 										exitMenu();
 										break;
 									case 3:
-										viewProduct();
+										viewFullproduct();
 										searchProducts();
 										exitMenu();
 										break;
@@ -157,6 +159,8 @@ int main(int argc, char *argv[]) {
 				}while(choiceCategory != 7);
 				break;
 			case 3:
+				printf("Exit the program.\n");
+				printf("See you again !!!");
 				break;				
 		}
 	}while(choice != 3);
