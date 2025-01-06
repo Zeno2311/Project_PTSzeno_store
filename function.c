@@ -522,6 +522,7 @@ void addproduct() { // menu.02 them san pham vao trong cua hang
             }
         }
         // Ten san pham
+        fflush(stdin);
         printf("Name Product: ");
         fgets(add[i].nameProduct, sizeof(add[i].nameProduct), stdin);
         add[i].nameProduct[strcspn(add[i].nameProduct, "\n")] = '\0';
@@ -530,6 +531,7 @@ void addproduct() { // menu.02 them san pham vao trong cua hang
             printf("Product name cannot be empty. Please enter again: ");
             fgets(add[i].nameProduct, sizeof(add[i].nameProduct), stdin);
             add[i].nameProduct[strcspn(add[i].nameProduct, "\n")] = '\0';
+            fflush(stdin);
         }
         // Kiem tra ten san pham khong bi trung
         fseek(ptr, 0, SEEK_SET);
